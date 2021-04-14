@@ -1,0 +1,59 @@
+
+
+SSH keygen
+https://www.mrtechnique.com/how-to-set-up-ssh-keys-on-a-mac/#:~:text=The%20default%20SSH%20public%20and,name%20for%20the%20key%20pair.
+--
+ssh-keygen for smaug
+keys added to server
+ssh mbse_login01@51.104.59.210
+with pwd..
+
+--
+disk partitioning
+ref: https://codingbee.net/rhcsa/rhcsa-creating-partitions
+lsblk
+[mbse_login01@centos-vm /]$ lsblk
+NAME   MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
+sda      8:0    0  30G  0 disk 
+├─sda1   8:1    0   1M  0 part 
+└─sda2   8:2    0  30G  0 part /
+sdb      8:16   0  64G  0 disk 
+└─sdb1   8:17   0  64G  0 part /mnt/resource
+sdc      8:32   0   1T  0 disk 
+
+sda2 -> is root - OS
+sdc -> data disk
+
+install java 
+------------
+sudo yum install java-1.8.0-openjdk
+java -version
+openjdk version "1.8.0_282"
+OpenJDK Runtime Environment (build 1.8.0_282-b08)
+OpenJDK 64-Bit Server VM (build 25.282-b08, mixed mode)
+ - might need to change java version
+ https://docs.nomagic.com/display/NMDOC/Java+version+support
+  - java has moved on... :)
+  
+  install flexlm
+  --------------
+  might need to setup firewall manually
+  sudo yum provides /lib/ld-lsb.so.3
+  
+  setup new user 
+  
+sudo adduser newuser
+sudo passwd newuser
+sudo usermod -aG wheel newuser
+sudo yum install redhat-lsb-core.i686
+
+need to sort licences out with Phil
+sudo systemctl start lmadmin
+
+install apache Cassandra
+scp install_cassandra3_11_centos7.sh mbse_login01@51.104.59.210:/home/mbse_login01
+chmod +x ...
+ - - script doesn't work
+ need to enable 
+  - - systemctl enable firewalld
+==== AUTHENTICATION FAILED ===
