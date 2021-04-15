@@ -365,9 +365,11 @@ to start on reboot.
  
  access via the webinterface still not working.
  https://51.104.59.210:8443/webapp
+  - so hoping go get this working tonight!.... poo
  
  suspect firewall issues 
  Needs certificate
+ Azure disables ping for DoS issues
  
 
 
