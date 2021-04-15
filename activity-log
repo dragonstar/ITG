@@ -306,5 +306,69 @@ Removing installanywhere temporary directory
 
  NOW do post installation
  ------------------------
+sudo vi /opt/local/TeamworkCloud/configuration/application.conf
+check seed is your local iP
+change password - i've used my login password
+
+server.public.host=public ip
+sudo vi /opt/local/TeamworkCloud/configuration/application.conf 
+sudo vi /opt/local/TeamworkCloud/AuthServer/config/authserver.properties 
+sudo vi /opt/local/TeamworkCloud/WebAppPlatform/shared/conf/webappplatform.properties 
+check and make changes iaw guidance documents 
+
+start authserver
+sudo systemctl start authserver
+[mbse_login01@centos-vm WebAppPlatform]$ sudo systemctl status -l authserver
+● authserver.service - No Magic AuthServer
+   Loaded: loaded (/etc/systemd/system/authserver.service; enabled; vendor preset: disabled)
+   Active: active (running) since Thu 2021-04-15 16:26:15 UTC; 3s ago
+   
+
+start teamwork cloud
+sudo systemctl start twcloud
+[mbse_login01@centos-vm WebAppPlatform]$ sudo systemctl status -l twcloud
+● twcloud.service - No Magic Teamwork Cloud
+   Loaded: loaded (/etc/systemd/system/twcloud.service; enabled; vendor preset: disabled)
+   Active: active (running) since Thu 2021-04-15 16:34:00 UTC; 11s ago
+
+
+sudo systemctl start webapp
+Apr 15 16:35:30 centos-vm systemd[1]: Starting Web Application Platform...
+-- Subject: Unit webapp.service has begun start-up
+-- Defined-By: systemd
+-- Support: http://lists.freedesktop.org/mailman/listinfo/systemd-devel
+-- 
+-- Unit webapp.service has begun starting up.
+Apr 15 16:35:30 centos-vm startup.sh[8629]: touch: cannot touch ‘/opt/local/TeamworkCloud/WebAppPlatform/logs/catalina.out’: Permission denied
+Apr 15 16:35:30 centos-vm startup.sh[8629]: /opt/local/TeamworkCloud/WebAppPlatform/bin/catalina.sh: line 467: /opt/local/TeamworkCloud/WebAppPlatform/logs/catalina.out: Permission denied
+Apr 15 16:35:30 centos-vm systemd[1]: webapp.service: control process exited, code=exited status=1
+Apr 15 16:35:30 centos-vm systemd[1]: Failed to start Web Application Platform.
+-- Subject: Unit webapp.service has failed
+-- Defined-By: systemd
+-- Support: http://lists.freedesktop.org/mailman/listinfo/systemd-devel
+-- 
+-- Unit webapp.service has failed.
+-- 
+-- The result is failed.
+
+need to change permissions of 'logs'
+run
+chmod a+rwx -R logs 
+in ~WebAppPlatform
+then 
+[mbse_login01@centos-vm ~]$ sudo systemctl status webapp
+● webapp.service - Web Application Platform
+   Loaded: loaded (/etc/systemd/system/webapp.service; enabled; vendor preset: disabled)
+   Active: active (running) since Thu 2021-04-15 17:05:50 UTC; 38s ago
+   
+
+Run:-
+sudo systemctl enable twcloud
+sudo systemctl enable authserver
+sudo systemctl enable webapp
+
+to start on reboot.
+
+
 
 
