@@ -181,22 +181,12 @@ Teamwork Cloud                                   (created with InstallAnywhere)
 -------------------------------------------------------------------------------
 
 Preparing CONSOLE Mode Installation...
-
-
-
-
 ===============================================================================
-
-
 Please Wait
 -----------
-
-
-
 ===============================================================================
 Introduction
 ------------
-
 Teamwork Cloud installation
 
 Respond to each prompt to proceed to the next step in the installation.  If 
@@ -369,6 +359,15 @@ sudo systemctl enable webapp
 
 to start on reboot.
 
-
+ ----
+ ended up making all webapp folder universally writable - to ditch errors.  Needs investigating as it cannot stay like this.
+ log files all show ok now
+ 
+ access via the webinterface still not working.
+ https://51.104.59.210:8443/webapp
+ 
+ suspect firewall issues 
+ Needs certificate
+ 
 
 
