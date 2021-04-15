@@ -24,6 +24,13 @@ sdc      8:32   0   1T  0 disk
 sda2 -> is root - OS
 sdc -> data disk
 
+installing cinamon desktop
+--------------------------
+yum -y install epel-release
+yum --enablerepo=epel -y install cinnamon*
+echo "exec /usr/bin/cinnamon-session" >> ~/.xinitrc
+
+
 install java 
 ------------
 sudo yum install java-1.8.0-openjdk
