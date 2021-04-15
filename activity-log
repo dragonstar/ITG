@@ -176,3 +176,135 @@ Creating temporary directory for install anywhere
 IMPORTANT: 
            When prompted for user to run service, use twcloud
 
+===============================================================================
+Teamwork Cloud                                   (created with InstallAnywhere)
+-------------------------------------------------------------------------------
+
+Preparing CONSOLE Mode Installation...
+
+
+
+
+===============================================================================
+
+
+Please Wait
+-----------
+
+
+
+===============================================================================
+Introduction
+------------
+
+Teamwork Cloud installation
+
+Respond to each prompt to proceed to the next step in the installation.  If 
+you want to change something on a previous step, type 'back'.
+
+You may cancel this installation at any time by typing 'quit'.
+
+PRESS <ENTER> TO CONTINUE: 
+
+===============================================================================
+Pre-Installation Summary
+------------------------
+
+Please Review the Following Before Continuing:
+
+Product Name:
+    Teamwork Cloud
+
+Install Folder:
+    /opt/local/TeamworkCloud
+
+Machine IP address:
+    "172.16.0.4"
+
+Seed node IP address:
+    "172.16.0.4"
+
+JAVA_HOME:
+    "/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.282.b08-1.el7_9.x86_64/jre"
+
+Disk Space Information (for Installation Target): 
+    Required:     461,204,070 Bytes
+    Available: 28,905,197,568 Bytes
+
+PRESS <ENTER> TO CONTINUE: 
+===============================================================================
+Installation Complete
+---------------------
+
+Congratulations. Teamwork Cloud has been successfully installed to:
+
+/opt/local/TeamworkCloud
+
+You can update Teamwork Cloud configuration from
+/opt/local/TeamworkCloud/configuration/application.conf.
+For more information, see online document at
+https://docs.nomagic.com/display/TWCloud190SP3
+
+
+
+PRESS <ENTER> TO EXIT THE INSTALLER: 
+
+=======================
+Configuring firewall
+=======================
+Discovered firewall zone public
+success
+success
+Increase file limits for twcloud user
+Applying post-install performance tuning
+  /etc/sysctl.conf tuning
+net.ipv4.conf.all.arp_notify = 1
+net.ipv4.tcp_keepalive_time = 60
+net.ipv4.tcp_keepalive_probes = 3
+net.ipv4.tcp_keepalive_intvl = 10
+net.ipv4.tcp_mtu_probing = 1
+net.core.rmem_max = 67108864
+net.core.wmem_max = 67108864
+net.core.rmem_default = 16777216
+net.core.wmem_default = 16777216
+net.core.optmem_max = 40960
+net.core.default_qdisc = fq
+net.core.somaxconn = 4096
+net.ipv4.tcp_rmem = 4096 87380 33554432
+net.ipv4.tcp_wmem = 4096 65536 33554432
+net.ipv4.tcp_max_syn_backlog = 65536
+vm.max_map_count = 1048575
+vm.swappiness = 0
+vm.dirty_background_ratio = 5
+vm.dirty_ratio = 30
+  ... Creating disk, CPU, and memory tuning parameters in /home/twcloud/tunedisk.sh
+  ... Setting parameters to be executed on server restart
+  ... Applying tuning changes - there is a 30 second delay before execution
+sda
+/home/twcloud/tunedisk.sh: line 9: echo: write error: Invalid argument
+scheduler: [mq-deadline] kyber none
+nomerges: 1
+read_ahead_kb: 8
+rotational: 0
+sdb
+/home/twcloud/tunedisk.sh: line 9: echo: write error: Invalid argument
+scheduler: [mq-deadline] kyber none
+nomerges: 1
+read_ahead_kb: 8
+rotational: 0
+sdc
+/home/twcloud/tunedisk.sh: line 9: echo: write error: Invalid argument
+scheduler: [none] mq-deadline kyber
+nomerges: 1
+read_ahead_kb: 8
+rotational: 0
+never
+Removing installanywhere temporary directory
+
+
+
+
+ NOW do post installation
+ ------------------------
+
+
