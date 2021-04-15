@@ -24,7 +24,7 @@ sdc      8:32   0   1T  0 disk
 sda2 -> is root - OS
 sdc -> data disk
 
-installing cinamon desktop
+installing cinamon desktop (not needed on vm) - need virtual
 --------------------------
 yum -y install epel-release
 yum --enablerepo=epel -y install cinnamon*
@@ -41,26 +41,138 @@ OpenJDK 64-Bit Server VM (build 25.282-b08, mixed mode)
  - might need to change java version
  https://docs.nomagic.com/display/NMDOC/Java+version+support
   - java has moved on... :)
-  
+
+OPTION 2 - install java 202
+--------------------------
+RUN DOWNLOADED SCRIPT
+scp install_java_202.sh mbse_login01@51.104.59.210:/home/mbse_login01/install_scripts/install_java_202.sh
+then run
+
   install flexlm
   --------------
-  might need to setup firewall manually
-  sudo yum provides /lib/ld-lsb.so.3
-  
-  setup new user 
-  
-sudo adduser newuser
-sudo passwd newuser
-sudo usermod -aG wheel newuser
-sudo yum install redhat-lsb-core.i686
+from smaug::scp install_flex_centos7.sh mbse_login01@51.104.59.210:/home/mbse_login01/install_scripts
+start the firewalld
+sudo systemctl enable firewalld
+sudo systemctl start firewalld
+sudo systemctl status firewalld
+sudo yum provides /lib/ld-lsb.so.3
+chmod +x install_flex_centos7.sh
+sudo install_flex_centos7.sh
+// all defaults used
+===============================================================================
+Installation Complete
+---------------------
 
-need to sort licences out with Phil
+Congratulations. FlexNet Publisher License Server Manager has been 
+successfully installed to:
+
+   /opt/local/FNPLicenseServerManager
+
+PRESS <ENTER> TO EXIT THE INSTALLER: 
+cp: cannot stat ‘cameo’: No such file or directory
+mv: cannot stat ‘cameo’: No such file or directory
+mv: cannot stat ‘lmgrd’: No such file or directory
+======================
+Opening firewall ports
+======================
+success
+success
+==========================================
+Creating systemd service - lmadmin
+==========================================
+Created symlink from /etc/systemd/system/multi-user.target.wants/lmadmin.service to /etc/systemd/system/lmadmin.service.
+Removing installanywhere temporary directory
+==========================================
+lmadmin service installation complete
+  usage: systemctl start|stop lmadmin
+==========================================
+start it.
 sudo systemctl start lmadmin
 
-install apache Cassandra
-scp install_cassandra3_11_centos7.sh mbse_login01@51.104.59.210:/home/mbse_login01
-chmod +x ...
- - - script doesn't work
- need to enable 
-  - - systemctl enable firewalld
-==== AUTHENTICATION FAILED ===
+[mbse_login01@centos-vm ~]$ sudo systemctl status lmadmin
+● lmadmin.service - Flexnet License Daemon
+   Loaded: loaded (/etc/systemd/system/lmadmin.service; enabled; vendor preset: disabled)
+   Active: active (running) since Thu 2021-04-15 12:18:00 UTC; 30s ago
+  Process: 5730 ExecStart=/opt/local/FNPLicenseServerManager/lmadmin -allowStopServer yes (code=exited, status=0/SUCCESS)
+ Main PID: 5731 (lmadmin)
+   CGroup: /system.slice/lmadmin.service
+           └─5731 /opt/local/FNPLicenseServerManager/lmadmin -allowStopServer yes
+
+Apr 15 12:18:00 centos-vm systemd[1]: Starting Flexnet License Daemon...
+Apr 15 12:18:00 centos-vm systemd[1]: Started Flexnet License Daemon.
+===
+SERVICE IS RUNNING
+
+
+  install & start Cassandra
+  --------------
+
+chmod +x install_scripts/install_cassandra3_11_centos7.sh 
+sudo install_scripts/install_cassandra3_11_centos7.sh 
+No errors
+=======================
+Configuring firewall
+=======================
+Discovered firewall zone public
+success
+success
+=====================================================
+Changing ownership of data and commit log directories
+=====================================================
+=====================================================
+Making configuration file changes
+=====================================================
+Created symlink from /etc/systemd/system/multi-user.target.wants/cassandra.service to /etc/systemd/system/cassandra.service.
+[mbse_login01@centos-vm ~]$ 
+ --------------
+Change settings
+sudo vi /etc/cassandra/default.conf/cassandra.yaml
+broadcast_rpc_address = 172.16.0.4
+all parameters correctly set to 172.17.0.4 - our private IP address
+all parameters ok
+thrift_framed_transport_size_in_mb: 100
+commitlog_segment_size_in_mb: 192
+read_request_timeout_in_ms: 1800000
+range_request_timeout_in_ms: 1800000
+write_request_timeout_in_ms: 1800000
+cas_contention_timeout_in_ms: 1000
+truncate_request_timeout_in_ms: 1800000
+request_timeout_in_ms: 1800000
+batch_size_warn_threshold_in_kb: 3000
+batch_size_fail_threshold_in_kb: 5000
+ -----
+all parameters ok
+data_file_directories:
+- /data/data
+commitlog_directory: /logs/commitlog
+hints_directory: /data/hints
+saved_caches_directory: /data/saved_caches
+
+[mbse_login01@centos-vm ~]$ sudo systemctl start cassandra
+[mbse_login01@centos-vm ~]$ nodetool status
+Datacenter: datacenter1
+=======================
+Status=Up/Down
+|/ State=Normal/Leaving/Joining/Moving
+--  Address     Load       Tokens       Owns (effective)  Host ID                               Rack
+UN  172.16.0.4  85.22 KiB  256          100.0%            91fe8935-c89c-427b-9954-1b4092c00964  rack1
+
+ ********** Cassandra is running
+ ********** As this is a test setup I have not tuned Cassandra
+
+
+  install TWC
+  --------------
+from smaug:: scp install_twc19sp3_centos7.sh mbse_login01@51.104.59.210:/home/mbse_login01/install_scripts
+
+
+Installed:
+  dejavu-serif-fonts.noarch 0:2.33-6.el7                                                                                                  
+
+Complete!
+Creating twcloud group and user
+Creating temporary directory for install anywhere
+
+IMPORTANT: 
+           When prompted for user to run service, use twcloud
+
