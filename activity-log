@@ -400,3 +400,7 @@ com.nomagic.webappplatform.authentication.AdministratorNotAuthorizedException: c
 
 
 
+
+Caused by: com.nomagic.authentication.client.exceptions.AuthenticationException: I/O error on GET request for "https://172.16.0.4:8555/authentication/.well-known/openid-configuration": Connection refused (Connection refused); nested exception is java.net.ConnectException: Connection refused (Connection refused)
+Caused by: org.springframework.web.client.ResourceAccessException: I/O error on GET request for "https://172.16.0.4:8555/authentication/.well-known/openid-configuration": Connection refused (Connection refused); nested exception is java.net.ConnectException: Connection refused (Connection refused)
+Caused by: java.net.ConnectException: Connection refused (Connection refused)
