@@ -371,5 +371,32 @@ to start on reboot.
  Needs certificate
  Azure disables ping for DoS issues
  
+19 April 2021
+==============
+
+Flexlm / Flexnet working as expected - web interface sent to Phil
+https://51.104.59.210:8443/webapp - still misbehaving
+
+Log reads
+2021-04-15 17:50:59,268 [main] INFO  com.nomagic.webappplatform.internal.version.TWCVersionValidator - Waiting for TWC/AuthServer to start, 0 of 120
+2021-04-15 17:50:59,268 [main] INFO  com.nomagic.webappplatform.internal.version.TWCVersionValidator - Waiting for TWC/AuthServer to start, 0 of 120
+2021-04-15 17:51:04,271 [main] ERROR com.nomagic.webappplatform.internal.service.twc.TeamworkCloudAdminService - 
+Administrator authentication error: I/O error on GET request for "https://172.16.0.4:8555/authentication/.well-known/openid-configuration": 
+Connection refused (Connection refused); nested exception is java.net.ConnectException: Connection refused (Connection refused)
+
+com.nomagic.authentication.client.exceptions.AuthenticationException: I/O error on GET request for 
+"https://172.16.0.4:8555/authentication/.well-known/openid-configuration": Connection refused (Connection refused); 
+nested exception is java.net.ConnectException: Connection refused (Connection refused)
+
+
+2021-04-19 15:30:50,289 [main] INFO  com.nomagic.webappplatform.internal.version.TWCVersionValidator - Waiting for TWC/AuthServer to start, 120 of 120
+2021-04-19 15:30:50,290 [main] ERROR com.nomagic.webappplatform.internal.version.TWCVersionValidator - Exception occurred during version checking
+com.nomagic.webappplatform.authentication.AdministratorNotAuthorizedException: com.nomagic.authentication.client.exceptions.AuthenticationException: I/O error on GET request for "https://172.16.0.4:8555/authentication/.well-known/openid-configuration": Connection refused (Connection refused); nested exception is java.net.ConnectException: Connection refused (Connection refused)
+        at com.nomagic.webappplatform.internal.service.twc.TeamworkCloudAdminService.authenticate(TeamworkCloudAdminService.java:59)
+        at com.nomagic.webappplatform.internal.service.twc.TeamworkCloudUserService.doLogin(TeamworkCloudUserService.java:410)
+        at com.nomagic.webappplatform.internal.service.twc.TeamworkCloudUserService.getUserRequestContext(TeamworkCloudUserService.java:383)
+        at com.nomagic.webappplatform.internal.service.twc.TeamworkCloudUserService.getVersion(TeamworkCloudUserService.java:334)
+        at com.nomagic.webappplatform.internal.version.TWCVersionValidator.getVersion(TWCVersionValidator.java:87)
+
 
 
