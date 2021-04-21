@@ -1,3 +1,17 @@
+TEAMWORK CLOUD 19.0 LTR SP3 INSALLATION LOG
+
+Instructions
+https://docs.nomagic.com/display/TWCloud190SP3/Installation+on+Linux+using+scripts
+These instructions were followed.
+The scrips on the RHS were downloaded and run
+----
+min server requirements
+8 Processor Cores - i.e. Quad Core Hyper-threaded CPU (such as Intel E3-1230 or faster).
+32 GB RAM (Motherboard with an ECC RAM is always preferred on any critical database server).
+Linux (RedHat/CentOS 7), 64 bit.  
+Capacity planning - https://docs.datastax.com/en/dse-planning/doc/planning/capacityPlanning.html
+worth reading this some time - i have not yet read this!
+do we have enough disk space???
 
 
 SSH keygen
@@ -24,11 +38,11 @@ sdc      8:32   0   1T  0 disk
 sda2 -> is root - OS
 sdc -> data disk
 
-installing cinamon desktop (not needed on vm) - need virtual
---------------------------
-yum -y install epel-release
-yum --enablerepo=epel -y install cinnamon*
-echo "exec /usr/bin/cinnamon-session" >> ~/.xinitrc
+I decided not to partition the disks iaw instructions - as this is only a test setup.... 
+However, it might have caused the problems we are seeing now...  
+
+Might like to install a virtual desktop - I didn't do this, 
+better to use terminal over ssh - less problems and more adaptable
 
 
 install java 
@@ -42,7 +56,7 @@ OpenJDK 64-Bit Server VM (build 25.282-b08, mixed mode)
  https://docs.nomagic.com/display/NMDOC/Java+version+support
   - java has moved on... :)
 
-OPTION 2 - install java 202
+OPTION 2 - install java 202 - I did not run option 2
 --------------------------
 RUN DOWNLOADED SCRIPT
 scp install_java_202.sh mbse_login01@51.104.59.210:/home/mbse_login01/install_scripts/install_java_202.sh
@@ -50,7 +64,8 @@ then run
 
   install flexlm
   --------------
-from smaug::scp install_flex_centos7.sh mbse_login01@51.104.59.210:/home/mbse_login01/install_scripts
+download scripts from from your local laptop (I call my macbook smaug)
+smaug::scp install_flex_centos7.sh mbse_login01@51.104.59.210:/home/mbse_login01/install_scripts
 start the firewalld
 sudo systemctl enable firewalld
 sudo systemctl start firewalld
