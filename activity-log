@@ -43,6 +43,12 @@ However, it might have caused the problems we are seeing now...
 
 Might like to install a virtual desktop - I didn't do this, 
 better to use terminal over ssh - less problems and more adaptable
+Maybe
+https://www.tecmint.com/nomachine-an-advanced-remote-desktop-access-tool/
+$ sudo wget http://web04.nomachine.com/download/4.0/Linux/nomachine_4.0.352_1_amd64.deb
+$ sudo dpkg -i nomachine_4.0.352_1_amd64.deb
+https://www.tecmint.com/how-to-install-teamviewer-on-linux-distributions/
+
 
 
 install java 
