@@ -1,0 +1,95 @@
+TEAMWORK CLOUD 19.0 LTR SP3 INSALLATION DEBUG
+
+Instructions
+https://docs.nomagic.com/display/TWCloud190SP3/Installation+on+Linux+using+scripts
+These instructions were followed.
+The scrips on the RHS were downloaded and run
+
+
+systemctl
+to view all processes
+
+  authserver.service      loaded active running   No Magic AuthServer
+  twcloud.service         loaded active running   No Magic Teamwork Cloud
+  webapp.service          loaded active running   Web Application Platform
+  lmadmin.service         loaded active running   Flexnet License Daemon
+
+installation scripts
+====================
+[mbse_login01@centos-vm ~]$ ls -l install_scripts/
+total 341948
+-rwxr-xr-x. 1 mbse_login01 mbse_login01      5937 Apr 14 17:18 install_cassandra3_11_centos7.sh
+-rwxr-xr-x. 1 mbse_login01 mbse_login01      5396 Apr 15 11:57 install_flex_centos7.sh
+-rw-r--r--. 1 mbse_login01 mbse_login01      1412 Apr 15 11:52 install_java_202.sh
+-rwxr-xr-x. 1 mbse_login01 mbse_login01      4819 Apr 15 12:57 install_twc19sp3_centos7.sh
+-rwxr-xr-x. 1 root         root          32944235 Sep 16  2019 lmadmin-i86_lsb-11_16_4_0.bin
+-rwxr-xr-x. 1 root         root         317174002 Nov  7  2019 twcloud_190_sp3_installer_linux64.bin
+[mbse_login01@centos-vm ~]$ pwd
+/home/mbse_login01
+[mbse_login01@centos-vm ~]$ 
+
+ISSUE 01 - flexnet:
+Access 
+http://51.104.59.210:8090/dashboard?vendor=&licenseTab=&selected=
+admin / pw1 (send separately)
+The web interface is displayed
+ - floating licence file is (sent separately) as you need it on your own machine
+ - the deamon is automatically downloaded by the script using wget - see installation instructions, however I have one in my home directory. 
+-- extract from the script
+# If Web GUI to Flex licensing is not a must - lmgrd can be used, can be placed in rc.local to startup on boot
+# usage - ./lmgrd -c PATH_TO_KEY_FILE -l PATH_TO_LOG_FILE
+# RW rights needed to both files
+echo "==========================================================="
+echo "Getting Linux 32-bit IPv6 version 11.14 "
+echo "==========================================================="
+wget http://d1g91r27pzl568.cloudfront.net/Cameo_daemon/FlexNet_11_14/ipv6/linux/lnx_32/cameo
+===============
+
+On installation of license I get:-
+Import Information
+Successfully uploaded license file to licenses/cameo/No Magic Floating License Server key for 0022481a29b1.txt.
+Updated vendor daemon configuration for cameo.
+=======================================
+Import Errors
+Unable to reread license files for vendor: cameo.
+=======================================
+Import Warnings
+Missing executable for cameo vendor: /opt/local/FNPLicenseServerManager/licenses/cameo/cameo.
+
+when you look at the 'Vendor Deamon Configuration' tab
+Don't know why the warnings state cameo/cameo
+there is only one deamon called cameo, and no folder called the same!...
+
+Access to:-
+
+https://51.104.59.210:8111/
+gives the teamwork cloud REST API
+
+https://51.104.59.210:8443.  -> gave the TOMCAT 404 error yesterday - now gives nothing
+Tomcat serice doesn't seen to be running and canot be found to be started... :(
+Can't even find it in the install scripts... 
+
+https://51.104.59.210:8443/webapp -> gives no response
+
+log file is here:-
+/opt/local/TeamworkCloud/WebAppPlatform/logs/webappplatform
+[mbse_login01@centos-vm webappplatform]$ 
+
+
+2021-04-22 14:52:12,126 [main] INFO  com.nomagic.webappplatform.internal.version.TWCVersionValidator - Waiting for TWC/AuthServer to start, 104 of 120
+2021-04-22 14:54:24,349 [main] ERROR com.nomagic.webappplatform.internal.service.twc.TeamworkCloudAdminService - Administrator authentication error: I/O error on POST request for "https://51.104.59.210:8555/authentication/token": Connection timed out (Connection timed out); nested exception is java.net.ConnectException: Connection timed out (Connection timed out)
+com.nomagic.authentication.client.exceptions.AuthenticationException: I/O error on POST request for "https://51.104.59.210:8555/authentication/token": Connection timed out (Connection timed out); nested exception is java.net.ConnectException: Connection timed out (Connection timed out)
+        at com.nomagic.authentication.client.wrappers.AuthenticationServerWrapper.invokeTokenEndpoint(AuthenticationServerWrapper.java:225)
+        at com.nomagic.authentication.client.wrappers.AuthenticationServerWrapper.authenticate(AuthenticationServerWrapper.java:121)
+        at com.nomagic.authentication.client.wrappers.AuthenticationServerWrapper.authenticate(AuthenticationServerWrapper.java:108)
+        at com.nomagic.authentication.client.AuthenticationClient.authenticate(AuthenticationClient.java:248)
+        at com.nomagic.webappplatform.internal.authentication.AuthenticationServiceImpl.authorize(AuthenticationServiceImpl.java:172)
+        at com.nomagic.webappplatform.internal.service.twc.TeamworkCloudAdminService.authenticate(TeamworkCloudAdminService.java:54)
+        at com.nomagic.webappplatform.internal.service.twc.TeamworkCloudUserService.doLogin(TeamworkCloudUserService.java:410)
+        at com.nomagic.webappplatform.internal.service.twc.TeamworkCloudUserService.getUserRequestContext(TeamworkCloudUserService.java:383)
+        at com.nomagic.webappplatform.internal.service.twc.TeamworkCloudUserService.getVersion(TeamworkCloudUserService.java:334)
+        at com.nomagic.webappplatform.internal.version.TWCVersionValidator.getVersion(TWCVersionValidator.java:87)
+
+
+
+
