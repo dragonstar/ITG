@@ -91,5 +91,17 @@ com.nomagic.authentication.client.exceptions.AuthenticationException: I/O error 
         at com.nomagic.webappplatform.internal.version.TWCVersionValidator.getVersion(TWCVersionValidator.java:87)
 
 
-
+2021-04-26 15:19:01,747 [main] INFO  com.nomagic.webappplatform.internal.version.TWCVersionValidator - Waiting for TWC/AuthServer to start, 87 of 120
+2021-04-26 15:21:13,971 [main] ERROR com.nomagic.webappplatform.internal.service.twc.TeamworkCloudAdminService - Administrator authentication error: I/O error on POST request for "https://51.104.59.210:8555/authentication/token": Connection timed out (Connection timed out); nested exception is java.net.ConnectException: Connection timed out (Connection timed out)
+com.nomagic.authentication.client.exceptions.AuthenticationException: I/O error on POST request for "https://51.104.59.210:8555/authentication/token": Connection timed out (Connection timed out); nested exception is java.net.ConnectException: Connection timed out (Connection timed out)
+        at com.nomagic.authentication.client.wrappers.AuthenticationServerWrapper.invokeTokenEndpoint(AuthenticationServerWrapper.java:225)
+        at com.nomagic.authentication.client.wrappers.AuthenticationServerWrapper.authenticate(AuthenticationServerWrapper.java:121)
+        at com.nomagic.authentication.client.wrappers.AuthenticationServerWrapper.authenticate(AuthenticationServerWrapper.java:108)
+        at com.nomagic.authentication.client.AuthenticationClient.authenticate(AuthenticationClient.java:248)
+        at com.nomagic.webappplatform.internal.authentication.AuthenticationServiceImpl.authorize(AuthenticationServiceImpl.java:172)
+        at com.nomagic.webappplatform.internal.service.twc.TeamworkCloudAdminService.authenticate(TeamworkCloudAdminService.java:54)
+        at com.nomagic.webappplatform.internal.service.twc.TeamworkCloudUserService.doLogin(TeamworkCloudUserService.java:410)
+        at com.nomagic.webappplatform.internal.service.twc.TeamworkCloudUserService.getUserRequestContext(TeamworkCloudUserService.java:383)
+        at com.nomagic.webappplatform.internal.service.twc.TeamworkCloudUserService.getVersion(TeamworkCloudUserService.java:334)
+        at com.nomagic.webappplatform.internal.version.TWCVersionValidator.getVersion(TWCVersionValidator.java:87)
 
