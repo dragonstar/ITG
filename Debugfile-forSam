@@ -73,6 +73,7 @@ https://51.104.59.210:8443/webapp -> gives no response
 
 log file is here:-
 /opt/local/TeamworkCloud/WebAppPlatform/logs/webappplatform
+/opt/local/TeamworkCloud/AuthServer/config/authserver.properties 
 [mbse_login01@centos-vm webappplatform]$ 
 
 
