@@ -1,1 +1,43 @@
+Scoping for Instaclustr PART 1
 
+Flexnet licence server is running on http://51.104.59.210:8090
+attach to port 1101
+
+Our company uses Cameo system Modeler to undertake its systems modelling
+Our challange is to share a common database across different company domain networks
+Shared data could therefore be on the 'Azure Cloud' and partner companies can use the 'shared data' and augment it with their intelectual property which they may not whish to share.
+
+PHASE 1 - Azure Cloud VMs (Proof of concept)
+The aim is to setup our engineering environment.
+
+Cameo system modeler uses a client server architecture Cameo system client is already installed on our engineering staff computers.
+TEAMWORK CLOUD is the Server side
+
+INSTALLING TEAMWORK CLOUD (INCLUDING JAVA AND CASSANDRA)
+https://docs.nomagic.com/display/TWCloud190SP4/Installation%2C+configuration%2C+and+licensing
+
+TEAMWORK CLOUD and CASSANDRA work seemlessly together and our measure of success will be that we can see, and work with Teamwork cloud - 
+ - No Teamwork Cloud clustering is necessary
+ - Assume a Cassandra cluster of 3 nodes, using 3 Virtual Machines (VMs)
+ - Assume one of the Cassandra nodes will also have Teamwork Cloud installed on it.  As this is coupled with the Cassandra Cluster you are working with it might be best that you install it with our support.
+ - Assume encryption between nodes
+ 
+ In the context of the installation instructions (https://docs.nomagic.com/display/TWCloud190SP4/Installation%2C+configuration%2C+and+licensing) how does the following scope sound:-
+ 
+ 1) You tell us what VM spec you need
+ 2) We rack up three VMs to your spec and give you su user accounts
+ 3) You setup the Cassandra network, aligned with the installation instructions & on one VM please install Teamwork Cloud (one node) (Flexnet licence server is above)
+ 4) We test that Teamwork Cloud works as expected on the new Cassandra Cluster
+ 
+ END OF PART 1
+ 
+ PART 2
+  - OUR ENGINEERING STAFF TO POPULATE DATABASE
+ PART 3
+  - INSTACLUSTR TO SPLIT NODES AND EMUALTE DATA DIODE USING KAFKA (THIS WILL INVOLVE INSTALLING TEAMWORK CLOUD ON EACH OF THE EXISTING NODE (as they will be accessed behind a firewall)
+ PART 4
+  - OUR ENGINEERING STAFF TO TEST 
+ PART 5
+  - PRODUCTION ROLLOUT
+ 
+[[end]]
