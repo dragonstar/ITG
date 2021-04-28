@@ -432,6 +432,8 @@ Caused by: java.net.ConnectException: Connection refused (Connection refused)
 
 Issue logged reggarding webapp resolved
 
+Port forwarded 8555
+
 sudo nano /opt/local/TeamworkCloud/AuthServer/config/authserver.properties 
 
 added public IP:
