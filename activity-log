@@ -425,3 +425,22 @@ com.nomagic.webappplatform.authentication.AdministratorNotAuthorizedException: c
 Caused by: com.nomagic.authentication.client.exceptions.AuthenticationException: I/O error on GET request for "https://172.16.0.4:8555/authentication/.well-known/openid-configuration": Connection refused (Connection refused); nested exception is java.net.ConnectException: Connection refused (Connection refused)
 Caused by: org.springframework.web.client.ResourceAccessException: I/O error on GET request for "https://172.16.0.4:8555/authentication/.well-known/openid-configuration": Connection refused (Connection refused); nested exception is java.net.ConnectException: Connection refused (Connection refused)
 Caused by: java.net.ConnectException: Connection refused (Connection refused)
+
+
+28 April 2021
+================
+
+Issue logged reggarding webapp resolved
+
+sudo nano /opt/local/TeamworkCloud/AuthServer/config/authserver.properties 
+
+added public IP:
+authentication.redirect.uri.whitelist=https://51.104.59.210:8443/webapp/,https://51.104.59.210:8111/,https://md_redirect
+
+webapp now working
+
+Login with admin details
+
+added 172.16.0.4:1101, license picked up.
+
+Accounts created for Charles.bacon and matt.stevens
